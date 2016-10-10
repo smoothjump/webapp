@@ -31,7 +31,7 @@ class User(Base):
 # 		self.session.commit()
 if __name__=='__main__':
 	session = DBSession()
-	new_user = User(login_name='arlen', name='李智',password='123')
+	new_user = User(login_name='arlen', name='赵笋',password='123')
 	session.add(new_user)
 	session.commit()
 		
