@@ -12,10 +12,10 @@ urls = (
     "/success", "Success",
 )
 app = web.application(urls, globals())
-
+session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'count': 0})
 render = render_jinja(
-    'template', # 模板路径
-    encoding='utf-8', #编码
+    'template', # template default path
+    encoding='utf-8', # encoding
 )
 
 class Index:
@@ -39,7 +39,7 @@ class Index:
         if user.auth() == True:
             raise web.seeother('/success?user='+form.d.login_name)
         else:
-            # Invalid auth info clear the original inout
+            # Invalid auth info clear the original input
             for r in form.inputs:
                 r.set_value("")
             return render.index(form=form)
@@ -47,9 +47,9 @@ class Index:
 class Success:
     def GET(self):
         vars = web.input()
-        print type(vars)
-        user = vars[0]
-        return render.success(user)
+        user = vars["user"]
+        print user
+        return render.success(user=user)
 
 if __name__ == "__main__":
     app.run()
