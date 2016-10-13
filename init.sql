@@ -5,4 +5,4 @@ CREATE TABLE `users` (
   `password` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_lnm` (`login_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
