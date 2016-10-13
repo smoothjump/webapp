@@ -7,9 +7,15 @@ from dbutils import getCounts, newEntity
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
+<<<<<<< HEAD
 # Database initialization:
 engine = create_engine('mysql+mysqldb://root:123@localhost:3306/test?charset=utf8', echo = True, pool_size = 10)
 # create DBSession:
+=======
+# 初始化数据库连接:
+engine = create_engine('mysql+mysqldb://admin:123@localhost:3306/test?charset=utf8', echo = True, pool_size = 10)
+# 创建DBSession类型:
+>>>>>>> 11314df1982e0bf316f206c822f41d4447de7128
 DBSession = sessionmaker(bind=engine)
 Base = declarative_base()
 
