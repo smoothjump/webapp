@@ -7,16 +7,16 @@ from dbutils import getCounts, newEntity
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
-# 初始化数据库连接:
+# Database initialization:
 engine = create_engine('mysql+mysqldb://root:123@localhost:3306/test?charset=utf8', echo = True, pool_size = 10)
-# 创建DBSession类型:
+# create DBSession:
 DBSession = sessionmaker(bind=engine)
 Base = declarative_base()
 
 class User(Base):
-    # 表的名字:
+    # Table Name:
     __tablename__ = 'users'
-    # 表的结构:
+    # Table defination:
     id = Column(Integer, primary_key = True)
     login_name = Column(String(20))
     name = Column(NVARCHAR(20))
