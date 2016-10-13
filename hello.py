@@ -11,6 +11,7 @@ urls = (
     "/register", "Register",
     "/success", "Success",
 )
+
 app = web.application(urls, globals())
 session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'count': 0})
 render = render_jinja(
@@ -50,6 +51,33 @@ class Success:
         user = vars["user"]
         print user
         return render.success(user=user)
+
+class Register:
+    form = web.form.Form(
+        web.form.Textbox('login_name', web.form.notnull, size=30, description="Username:"),
+        web.form.Password('password', web.form.notnull, size=30, description="Password:"),
+        web.form.Password('confirm', web.form.notnull, size=30, description="Confirm your password:"),
+        web.form.Textbox('name',web.form.notnull, size=30, description="Name:"),
+        web.form.Button('Login'),
+    )
+
+    def GET(self):
+        form = self.form()
+        return render.index(form=form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.index(form=form)
+        user = User(login_name = form.d.login_name, name = form.d.name, password = form.d.password)
+        if user.auth() == False:
+            raise web.seeother('/success?user='+form.d.login_name)
+        else:
+            # Invalid auth info clear the original input
+            for r in form.inputs:
+                r.set_value("")
+            return render.index(form=form)
+
 
 if __name__ == "__main__":
     app.run()

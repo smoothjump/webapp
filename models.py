@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
 # 初始化数据库连接:
-engine = create_engine('mysql+mysqldb://root:123@localhost:3306/test?charset=utf8', echo = True, pool_size = 10)
+engine = create_engine('mysql+mysqldb://admin:123@localhost:3306/test?charset=utf8', echo = True, pool_size = 10)
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 Base = declarative_base()
