@@ -8,7 +8,11 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
 # Database initialization
-engine = create_engine('mysql+mysqldb://root:123@localhost:3306/test?charset=utf8', echo = True, pool_size = 10)
+engine = create_engine(
+    'mysql+mysqldb://root:123@localhost:3306/test?charset=utf8', 
+    echo = True, 
+    pool_size = 10
+)
 # create DBSession
 DBSession = sessionmaker(bind=engine)
 Base = declarative_base()
